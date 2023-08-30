@@ -72,7 +72,7 @@ func ResolveClient(c *cli.Context) (*client.Client, error) {
 	backoffConfig := backoff.DefaultConfig
 	backoffConfig.MaxDelay = 1 * time.Second
 	opts = append(opts, client.WithGRPCDialOption(
-		grpc.WithConnectParams(grpc.ConnectParams{Backoff: backoffConfig}),
+		grpc.WithConnectParams(grpc.ConnectParams{Backoff: backoffConfig, MinConnectTimeout: 20 * time.Second}),
 	))
 
 	ctx := CommandContext(c)
